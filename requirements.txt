@@ -1,0 +1,20 @@
+mlflow==2.2.2
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+xgboost==2.0.3
+matplotlib==3.8.4
+python-box==6.0.2
+pyYAML==6.0.1
+types-pyYAML==6.0.12.20240311
+tqdm==4.66.2
+ensure==1.0.2
+joblib==1.4.2
+Flask==2.3.3
+Flask-Cors==4.0.0
+tzdata==2024.1
+pytz==2022.7
+pyarrow==11.0.0
+notebook
+
+-e .
