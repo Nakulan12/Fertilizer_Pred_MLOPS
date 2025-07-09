@@ -1,6 +1,6 @@
 from src.Fertilizer_Pred.constant import *
 from src.Fertilizer_Pred.utils.common import read_yaml,create_directories 
-from src.Fertilizer_Pred.entity.config_entity import DataIngestionConfig,DataValidationConfig
+from src.Fertilizer_Pred.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig
 
 class ConfigurationManager:
     def __init__(
@@ -47,5 +47,23 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation
+
+        create_directories([config.root_dir])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=config.root_dir,
+            train_data_path=config.train_data_path,
+            original_data_path=config.original_data_path,
+            transformed_train_path=config.transformed_train_path,
+            transformed_original_path=config.transformed_original_path,
+            train_label_path=config.train_label_path,
+            original_label_path=config.original_label_path,
+            label_encoder_path=config.label_encoder_path
+        )
+
+        return data_transformation_config
 
     

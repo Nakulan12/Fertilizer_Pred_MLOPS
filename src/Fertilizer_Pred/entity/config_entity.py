@@ -16,3 +16,16 @@ class DataValidationConfig:
     train_data_path: Path
     original_data_path: Path
     all_schema: dict
+
+
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    root_dir: Path
+    train_data_path: Path
+    original_data_path: Path
+    transformed_train_path: Path
+    transformed_original_path: Path
+    train_label_path: Path
+    original_label_path: Path
+    label_encoder_path: Path
