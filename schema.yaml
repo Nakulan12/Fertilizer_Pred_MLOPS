@@ -1,1 +1,17 @@
-key : value
+COLUMNS:
+  Temparature: float
+  Humidity: float
+  Moisture: float
+  Soil Type: object
+  Crop Type: object
+  Nitrogen: int
+  Potassium: int
+  Phosphorous: int
+  Fertilizer Name: object
+
+
+
+
+TARGET_COLUMN:
+  name: Fertilizer Name
+  
