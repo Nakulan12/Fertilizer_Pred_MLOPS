@@ -54,3 +54,15 @@ class ModelTrainerConfig:
     n_folds: int
     random_seed: int
     n_jobs: int
+
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    test_data_path: Path
+    model_dir: Path  # Directory containing xgb_fold0.bin, xgb_fold1.bin, etc.
+    metric_file_name: Path
+    target_column: str
+    mlflow_uri: str
+    label_encoder_path: Path
+    all_params: dict

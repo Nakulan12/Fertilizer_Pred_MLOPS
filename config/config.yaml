@@ -30,3 +30,13 @@ model_trainer:
   original_label_path: artifacts/data_transformation/original_labels.csv
   model_dir: artifacts/model_trainer/models
   model_name: xgb_model.bin
+
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  test_data_path: artifacts/data_ingestion/Fertilizer_Pred/train.csv  # Must include target column
+  model_dir: artifacts/model_trainer/models  # Contains xgb_fold0.bin, xgb_fold1.bin, etc.
+  metric_file_name: artifacts/model_evaluation/metrics.json
+  mlflow_uri: https://dagshub.com/gowtham-dd/Fertilizer_Pred_MLOPS.mlflow
+  target_column: "Fertilizer Name"  # Must match data_transformation.target_column
+  label_encoder_path: artifacts/model_trainer/models/label_encoder.pkl

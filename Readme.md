@@ -64,25 +64,15 @@ open up you local host and port
 [dagshub](https://dagshub.com/)
 
 import dagshub
-dagshub.init(repo_owner='gowtham-dd', repo_name='winepred-MLFLOW', mlflow=True)
+dagshub.init(repo_owner='gowtham-dd', repo_name='Fertilizer_Pred_MLOPS', mlflow=True)
 
 import mlflow
 with mlflow.start_run():
   mlflow.log_param('parameter name', 'value')
   mlflow.log_metric('metric name', 1)
 
-Run this to export as env variables:
-
-```bash
-
-export MLFLOW_TRACKING_URI=https://dagshub.com/entbappy/End-to-end-Machine-Learning-Project-with-MLflow.mlflow
-
-export MLFLOW_TRACKING_USERNAME=entbappy 
-
-export MLFLOW_TRACKING_PASSWORD=6824692c47a369aa6f9eac5b10041d5c8edbcef0
-
-```
-
+export MLFLOW_TRACKING_USERNAME=gowtham-dd
+export MLFLOW_TRACKING_PASSWORD=d11e272937af9550d93440735a1847e87ed89fb9
 
 
 # AWS-CICD-Deployment-with-Github-Actions

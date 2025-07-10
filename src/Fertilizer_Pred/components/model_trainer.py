@@ -40,7 +40,8 @@ class ModelTrainer:
             le = LabelEncoder()
             y_train = le.fit_transform(train_labels)
             y_original = le.transform(original_labels)
-            
+            joblib.dump(le, os.path.join(self.config.model_dir, "label_encoder.pkl"))
+
             # Combine data
             X = pd.concat([df_train, df_original], axis=0)
             y = np.concatenate([y_train, y_original])
