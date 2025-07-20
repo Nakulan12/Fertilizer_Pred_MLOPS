@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block title %}Predict - AgriSmart{% endblock %}
+
+{% block extra_css %}
+<style>
+    .prediction-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .form-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        padding: 3rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .form-header i {
+        font-size: 3rem;
+        color: var(--secondary);
+        margin-bottom: 1rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control, .form-select {
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .loading {
+        display: none;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #e5e7eb;
+        border-top: 4px solid var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .feature-item {
+        text-align: center;
+        padding: 1rem;
+        background: #f8fafc;
+        border-radius: 10px;
+    }
+
+    .feature-item i {
+        font-size: 2rem;
+        color: var(--secondary);
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="prediction-container">
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <i class="fas fa-seedling"></i>
+                <h1 class="text-primary fw-bold">Fertilizer Prediction</h1>
+                <p class="text-muted">Enter your soil and environmental data to get AI-powered fertilizer recommendations</p>
+            </div>
+
+            <form action="/predict" method="post" id="predictionForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            <i class="fas fa-thermometer-half me-2"></i>Temperature (°C)
+                        </label>
+                        <input type="number" step="0.1" name="temperature" class="form-control" 
+                               placeholder="e.g., 25.5" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            <i class="fas fa-tint me-2"></i>Humidity (%)
+                        </label>
+                        <input type="number" step="0.1" name="humidity" class="form-control" 
+                               placeholder="e.g., 65" min="0" max="100" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            <i class="fas fa-mountain me-2"></i>Soil Type
+                        </label>
+                        <select name="soil_type" class="form-select" required>
+                            <option value="">Select soil type</option>
+                            <option value="Sandy">Sandy Soil</option>
+                            <option value="Loamy">Loamy Soil</option>
+                            <option value="Clay">Clay Soil</option>
+                            <option value="Black">Black Soil</option>
+                            <option value="Red">Red Soil</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            <i class="fas fa-flask me-2"></i>Soil pH
+                        </label>
+                        <input type="number" step="0.1" name="ph" class="form-control" 
+                               placeholder="e.g., 6.5" min="3" max="10" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-atom me-2"></i>Nitrogen (kg/ha)
+                        </label>
+                        <input type="number" step="0.1" name="nitrogen" class="form-control" 
+                               placeholder="e.g., 40" min="0" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-gem me-2"></i>Potassium (kg/ha)
+                        </label>
+                        <input type="number" step="0.1" name="potassium" class="form-control" 
+                               placeholder="e.g., 20" min="0" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-fire me-2"></i>Phosphorous (kg/ha)
+                        </label>
+                        <input type="number" step="0.1" name="phosphorous" class="form-control" 
+                               placeholder="e.g., 15" min="0" required>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">
+                            <i class="fas fa-cloud-rain me-2"></i>Rainfall (mm)
+                        </label>
+                        <input type="number" step="1" name="rainfall" class="form-control" 
+                               placeholder="e.g., 150" min="0" required>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-brain me-2"></i>Get AI Recommendations
+                    </button>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner mb-3"></div>
+                    <p class="text-muted">Analyzing your data with AI...</p>
+                </div>
+            </form>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-brain"></i>
+                    <h6>AI-Powered</h6>
+                    <p class="text-muted mb-0">Advanced machine learning</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-leaf"></i>
+                    <h6>Sustainable</h6>
+                    <p class="text-muted mb-0">Eco-friendly recommendations</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h6>Data-Driven</h6>
+                    <p class="text-muted mb-0">Based on research</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-clock"></i>
+                    <h6>Instant Results</h6>
+                    <p class="text-muted mb-0">Get results in seconds</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('predictionForm').addEventListener('submit', function(e) {
+    const submitBtn = document.querySelector('button[type="submit"]');
+    const loading = document.getElementById('loading');
+    
+    submitBtn.style.display = 'none';
+    loading.style.display = 'block';
+});
+
+// Form validation
+document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.addEventListener('input', function() {
+        const value = parseFloat(this.value);
+        const min = parseFloat(this.min);
+        const max = parseFloat(this.max);
+        
+        if (min !== null && value < min) {
+            this.setCustomValidity(`Value must be at least ${min}`);
+        } else if (max !== null && value > max) {
+            this.setCustomValidity(`Value must be at most ${max}`);
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+});
+</script>
+{% endblock %}

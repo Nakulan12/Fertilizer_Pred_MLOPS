@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}About - AgriSmart{% endblock %}
+
+{% block extra_css %}
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, var(--secondary) 0%, var(--success) 100%);
+        color: white;
+        padding: 6rem 0;
+        text-align: center;
+    }
+
+    .mission-section {
+        padding: 5rem 0;
+        background: var(--gray-100);
+    }
+
+    .tech-stack {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        height: 100%;
+    }
+
+    .tech-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="about-hero">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h1 class="display-3 fw-bold mb-4">About AgriSmart</h1>
+                <p class="lead mb-4">
+                    AI-powered fertilizer recommendation system designed to help farmers 
+                    optimize their crop yields through data-driven insights.
+                </p>
+                <a href="{{ url_for('predict_form') }}" class="btn btn-light btn-lg">
+                    <i class="fas fa-rocket me-2"></i>Try Our System
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="mission-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h2 class="display-5 fw-bold text-primary mb-4">Our Mission</h2>
+                <p class="lead mb-4">
+                    To provide farmers with accurate, AI-powered fertilizer recommendations 
+                    that optimize crop yields while promoting sustainable agricultural practices.
+                </p>
+                <div class="row g-4">
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success fa-2x me-3"></i>
+                            <div>
+                                <h5 class="fw-bold mb-1">Data-Driven</h5>
+                                <p class="text-muted mb-0">Scientific approach</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-leaf text-success fa-2x me-3"></i>
+                            <div>
+                                <h5 class="fw-bold mb-1">Sustainable</h5>
+                                <p class="text-muted mb-0">Eco-friendly solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-chart-line text-success fa-2x me-3"></i>
+                            <div>
+                                <h5 class="fw-bold mb-1">Optimized</h5>
+                                <p class="text-muted mb-0">Maximum productivity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-users text-success fa-2x me-3"></i>
+                            <div>
+                                <h5 class="fw-bold mb-1">Accessible</h5>
+                                <p class="text-muted mb-0">Easy to use</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="text-center">
+                    <i class="fas fa-seedling text-primary" style="font-size: 20rem; opacity: 0.1;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technology Stack -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-5 fw-bold text-primary mb-3">Our Technology</h2>
+            <p class="lead text-muted">
+                Built with modern technologies for accurate and reliable predictions
+            </p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="tech-stack">
+                    <i class="fab fa-python tech-icon text-primary"></i>
+                    <h4 class="fw-bold mb-3">Python</h4>
+                    <p class="text-muted">
+                        Machine learning models built with scikit-learn and XGBoost for accurate predictions.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="tech-stack">
+                    <i class="fas fa-brain tech-icon text-success"></i>
+                    <h4 class="fw-bold mb-3">Machine Learning</h4>
+                    <p class="text-muted">
+                        Advanced algorithms for analyzing soil data and environmental conditions.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="tech-stack">
+                    <i class="fab fa-html5 tech-icon text-warning"></i>
+                    <h4 class="fw-bold mb-3">Web Technologies</h4>
+                    <p class="text-muted">
+                        Modern web stack with Flask and Bootstrap for optimal user experience.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="tech-stack">
+                    <i class="fas fa-database tech-icon text-info"></i>
+                    <h4 class="fw-bold mb-3">Data Processing</h4>
+                    <p class="text-muted">
+                        Efficient data processing and model deployment for fast response times.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
